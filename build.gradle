@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.graalvm.buildtools.native' version '0.10.2'
 }
 
 group = 'kr.co.mz'
@@ -29,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'org.openjdk.jmh:jmh-core:1.37'
+    implementation 'org.graalvm.buildtools:native-gradle-plugin:0.10.2'
     testImplementation 'org.springframework.security:spring-security-test'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -41,4 +43,24 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+graalvmNative {
+    binaries {
+        main {
+            buildArgs.add('--no-fallback')
+            buildArgs.add('--initialize-at-build-time=org.openjdk.jmh')
+            buildArgs.add('-H:ResourceConfigurationFiles=src/main/resources/resource-config.json')
+        }
+    }
+}
+
+task copyResourceConfig(type: Copy) {
+    from 'src/main/resources'
+    into "${buildDir}/native/nativeCompile/src/main/resources"
+    include 'resource-config.json'
+}
+
+tasks.named('nativeCompile') {
+    dependsOn copyResourceConfig
 }
