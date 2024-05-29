@@ -19,6 +19,5 @@ public class DemoApplication {
         .build();
 
     new Runner(opt).run();
-
   }
 }

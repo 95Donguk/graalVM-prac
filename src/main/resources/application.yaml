@@ -1,6 +1,0 @@
-# 기존 JPA를 사용하고 있다면 JPA의 `ddl_auto` 속성을 `validate`로 바꿔준다
-spring:
-  flyway:
-#    잦은 DB스키마 변경으로 인해서 Flyway를 비활성화 시킬려면 enabled: false
-    enabled: true
-    baseline-on-migrate: true
