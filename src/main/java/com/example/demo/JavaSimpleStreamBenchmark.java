@@ -10,8 +10,8 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 1)
-@Measurement(iterations = 3)
+@Warmup(iterations = 5)
+@Measurement(iterations = 10)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Fork(1)
