@@ -24,7 +24,7 @@ public class JavaSimpleStreamBenchmark {
      return Arrays.stream(values)
          .map(x -> x + 1)
          .map(x -> x * 2)
-         .map(x -> x * 3)
+         .map(x -> x + 2)
          .reduce(0, Integer::sum);
   }
 }
